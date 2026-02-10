@@ -1,4 +1,4 @@
-use tp_1_safe_elevator_interface::{Elevator, ElevatorError, State};
+use tp_1_safe_elevator_interface::{elevator::Elevator, elevator_error::ElevatorError, state::State};
 
 #[test]
 fn call_and_step_reaches_destination_and_opens_doors() {
