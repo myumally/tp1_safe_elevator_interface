@@ -70,8 +70,6 @@ impl Elevator{
             } else if self.floor > dest {
                 self.state = State::MovingDown;
             } 
-        } else {
-            self.state = State::Idle;
         }
         Ok(())
     }
@@ -84,17 +82,13 @@ impl Elevator{
             return Ok(());
         }
         self.queue.push_back(f);
-        if let Some(&mut dest) = self.queue.front_mut(){
+        if let Some(&dest) = self.queue.front() && self.state == State::Idle {
             if self.floor < dest{
                 self.state = State::MovingUp;
             } 
             else if self.floor > dest{
                 self.state = State::MovingDown;
             }
-            else {
-                self.queue.pop_front();
-                return self.open_doors();
-            } 
         }
         Ok(())
         
@@ -115,7 +109,6 @@ impl Elevator{
             }
             else if self.floor == dest{
                 self.queue.pop_front();
-                return self.open_doors();
             } 
         }
         else{
