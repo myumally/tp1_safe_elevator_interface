@@ -54,9 +54,7 @@ impl Elevator{
         else if self.state == State::MovingDown || self.state == State::MovingUp {
             return Err(ElevatorError::CannotOpenWhileMoving)
         }
-        else {
-            self.state = State::DoorsOpen;
-        }
+        self.state = State::DoorsOpen;
         Ok(())
     }
 
@@ -109,6 +107,7 @@ impl Elevator{
             }
             else if self.floor == dest{
                 self.queue.pop_front();
+                return self.open_doors();
             } 
         }
         else{
